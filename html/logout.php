@@ -1,0 +1,7 @@
+<?
+
+Authenticator::logout();
+DisplayController::login();
+
+
+?>

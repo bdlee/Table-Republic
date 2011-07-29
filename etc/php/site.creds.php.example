@@ -1,0 +1,16 @@
+<?
+
+    define('HOME_SITE', '');
+    define('QUEST_HOME', '');
+    define('SURVEY_HOME', '');
+
+    define("DB_HOST", "");
+    define("DB_USER", "");
+    define("DB_PASS", "");
+    define("DB_NAME", "");
+    
+    define("SURVEY_HOST", "");
+    define("SURVEY_USER", "");
+    define("SURVEY_PASS", "");
+    define("SURVEY_NAME", "");
+?>
