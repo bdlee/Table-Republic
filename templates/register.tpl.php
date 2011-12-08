@@ -1,6 +1,3 @@
-<?
-    $this->display('header');
-?>
 
 All fields are required:<br />
 <br />
@@ -44,8 +41,3 @@ All fields are required:<br />
     </table>
   </form>
 </div>
-
-
-<?
-    $this->display('footer');
-?>

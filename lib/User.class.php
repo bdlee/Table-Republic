@@ -11,12 +11,8 @@ class User extends DataObject {
     public $lname;
     public $validated;
     
-    public function __construct($id = null, $password = null) {
-        if(empty($id)) {
-            // new user
-        } else {
-            // lookup the user in the DB
-        }
+    public function __construct() {
+        
     }
     
     public static function getUser($email, $password) {

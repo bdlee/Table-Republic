@@ -1,13 +1,5 @@
 <?
     header('Content-type: text/css');
-    
-    function is_ie() {
-        if (isset($_SERVER['HTTP_USER_AGENT']) && 
-        (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false))
-            return true;
-        else
-            return false;
-    }
 
     $color = '#000';
     $linkColor = '#3366FF';
@@ -90,7 +82,14 @@ div.entryForm input.button {
     padding: 2px 8px;
 }
 
-div.sideNav {
+div.leftSide {
+    border: 1px solid <?= $borderColor ?>;
+    width: 186px;
+    padding: 0px;
+    margin-right: 10px;
+    float: left;
+}
+div.rightSide {
     border: 1px solid <?= $borderColor ?>;
     width: 186px;
     padding: 0px;
@@ -98,6 +97,7 @@ div.sideNav {
     float: left;
 }
 div.results {
+    width: 762px;
     float: left;
 }
 

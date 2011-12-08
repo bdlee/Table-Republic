@@ -28,18 +28,45 @@ class DisplayController {
         return;
     }
     
+    public static function home() {
+        if(@$_GET['action'] == 'Search') {
+            self::listings();
+            return;
+        }
+        $page = new Page();
+        
+        $page->set('includeSearch', true);
+        $page->display('home');
+        return;
+    }
+    
     public static function listings() {
         $page = new Page();
         $page->set('userId',false);
         
-        $restaurants = Restaurant::getActiveRestaurants();
-        
-        
+        $restaurants = Restaurant::getActiveRestaurants($_GET);
         
         $page->set('restaurants', $restaurants);
 
+        $page->set('includeSearch', true);
         $page->display('listings');
         return;
     }
 
+    public static function restaurant() {
+        $id = @$_GET['id'];
+        $restaurant = Restaurant::getRestaurant($id);
+        if(empty($restaurant)) {
+            header('Location: http://' . $_SERVER['SERVER_NAME'] . '/index.php');
+            exit;
+        }
+
+        $page = new Page();
+
+        $page->set('restaurant', $restaurant);
+
+        $page->set('js',array('/includes/js/jquery.lightbox-0.5.pack.js'));
+        $page->display('restaurant');
+        return;
+    }
 }

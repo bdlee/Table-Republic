@@ -6,32 +6,37 @@ class Table extends DataObject {
 
     private $id;
     public $restaurantId;
-    public $userId;
-    public $startDate;
-    public $endDate;
     public $tableMin;
     public $tableMax;
-    private $reservationDate;
-    private $reservationStartTime;
-    private $reservationEndTime;
-    private $restaurant;
+    private $reservations;
     
     public function __construct($id = null) {
-        if(empty($id)) {
-            // new user
-        } else {
-            // lookup the user in the DB
-        }
     }
     
     // lookup a user by email password. returns the user obj
-    public static function getTablesByRestaurant($restaurantId, $active = true) {
+    public static function getTablesByRestaurant($restaurantId, $fields = null) {
         $mysqli = conn::get();
         
-        $sql = sprintf("SELECT * FROM tables WHERE restaurant_id = %s",
+        if(isset($fields['date'])) {
+            $oDate = new Datetime($fields['date']);
+        } else {
+            $oDate = new Datetime();
+        }
+        $date = $mysqli->real_escape_string($oDate->format('Y-m-d H:i:s'));
+        $dayofweek = $mysqli->real_escape_string($oDate->format('w'));
+        $number = isset($fields['number']) ? $fields['number'] : null;
+        $time = isset($fields['time']) ? $fields['time'] : null;
+        
+        $sql = sprintf("SELECT t.* FROM tables t, reservations r WHERE t.restaurant_id = r.restaurant_id AND t.id = r.table_id AND t.restaurant_id = '%s'",
             $mysqli->real_escape_string($restaurantId));
-        if($active) $sql .= " AND end_date > NOW() AND start_date < NOW() AND user_id = 0";
-        $sql .= " ORDER BY reservation_date ASC, reservation_start_time ASC, table_min ASC";
+        $sql .= " AND r.end_date > NOW() AND r.start_date < NOW()";
+        if($fields) // do this only if a search query was put through
+            $sql .= " AND r.days_of_week = '%$dayofweek%'";
+        if($number) // number of guests
+            $number = sprintf(" AND t.table_min < %d AND table_max > %d", $number, $number);
+        if($time) // time of reservation
+            $time = sprintf(" AND r.start_time < '%s' AND r.end_time > '%s'", $time, $time);
+        $sql .= " GROUP BY t.id ORDER BY r.start_time ASC, t.table_min ASC";
         
         $result = $mysqli->query($sql);
         
@@ -42,10 +47,25 @@ class Table extends DataObject {
         return self::getList($result);
     }
     
-    public static function getActiveTables() {
+    public static function getActiveTables($fields = null) {
         $mysqli = conn::get();
         
-        $sql = "SELECT * FROM tables WHERE end_date > NOW() AND start_date < NOW()";
+        if(isset($fields['date'])) {
+            $oDate = new Datetime($fields['date']);
+        } else {
+            $oDate = new Datetime();
+        }
+        $date = $mysqli->real_escape_string($oDate->format('Y-m-d H:i:s'));
+        $dayofweek = $mysqli->real_escape_string($oDate->format('w'));
+        $number = isset($fields['number']) ? $fields['number'] : null;
+        $time = isset($fields['time']) ? $fields['time'] : null;
+        
+        $sql = "SELECT * FROM tables WHERE 1";
+        $sql .= " AND (s.end_date IS NULL OR s.end_date > $date) AND s.start_date < $date";
+        if($number != null) {
+            $number = sprintf('%d',$mysqli->real_escape_string($number));
+            $sql .= " AND t.table_min < $number AND t.table_max > $number";
+        }
         $sql .= " ORDER BY reservation_date ASC, reservation_start_time ASC, table_min ASC";
         
         $result = $mysqli->query($sql);
@@ -59,16 +79,10 @@ class Table extends DataObject {
     
     protected function row2obj($row) {
         $table = new Table();
-        $table->id = $row['id'];
+        $table->id = $row['table_id'];
         $table->restaurantId = $row['restaurant_id'];
-        $table->userId = $row['user_id'];
-        $table->startDate = $row['start_date'];
-        $table->endDate = $row['end_date'];
         $table->tableMin = $row['table_min'];
         $table->tableMax = $row['table_max'];
-        $table->reservationDate = $row['reservation_date'];
-        $table->reservationStartTime = $row['reservation_start_time'];
-        $table->reservationEndTime = $row['reservation_end_time'];
         
         return $table;
     }
@@ -87,11 +101,11 @@ class Table extends DataObject {
         
         return date('g:i A', $time);
     }
-    public function getRestaurant() {
-        if(empty($this->restaurant)) {
-            $this->restaurant = new Restaurant($this->restaurantId);
+    public function getReservations() {
+        if(!isset($this->reservations)) {
+            $this->reservations = Reservations::getReservationsByTable($this->restaurantId, $this->id);
         }
-        return $this->restaurant;
+        return $this->reservations;
     }
 }
 

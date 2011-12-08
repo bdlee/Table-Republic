@@ -25,7 +25,9 @@ class Page {
         if (!preg_match("/\.\./", $page) && file_exists($pagePath))
         {
             extract($data);
+            require(dirname(__FILE__) . "/../templates/header.tpl.php");
             require($pagePath);
+            require(dirname(__FILE__) . "/../templates/footer.tpl.php");
         } else {
             echo "$page not found!";
         }

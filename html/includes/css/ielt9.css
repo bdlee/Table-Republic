@@ -1,0 +1,93 @@
+﻿ header, section, footer, address, nav, menu {
+	display: block;
+}
+ #doobleline {
+	border-top: 1px solid #9b9b9b;
+}
+.formborder select, .pagesort select {
+	filter: alpha(opacity=0);
+}
+.formborder {
+	background: none;
+	border: 0;
+	padding: 1px 0;
+}
+.w198 {
+	background: url(../images/iefix_input198.gif) no-repeat left top transparent;
+	width: 198px;
+}
+.w191{
+	background: url(../images/iefix_input191.gif) no-repeat left top transparent;
+	width: 191px;
+}
+.w184{
+	background: url(../images/iefix_input184.gif) no-repeat left top transparent;
+	width: 184px;
+}
+.w245{
+	background: url(../images/iefix_input245.gif) no-repeat left top transparent;
+	width: 245px;
+}
+.pages .pagesort {
+	border: 0;
+	background: url(../images/iefix_resultsort.gif) no-repeat left top transparent;
+	padding: 1px;
+}
+.pages a {
+	background: url(../images/iefix_pageresult.gif) no-repeat left top transparent;
+	padding: 1px;
+	border: 0;
+}
+.pages .active {
+	background: url(../images/iefix_pageresultactive.gif) no-repeat left bottom transparent;
+	border: 0;
+	padding: 1px;
+}
+.bottomitem .showdetails {
+	border: 0;
+	background: url(../images/iefix_view183.gif) no-repeat left top transparent;
+	padding: 1px;
+}
+.bottomitem input {
+	padding: 1px;
+	border: 0;
+	background: url(../images/iefix_reserve183.gif) no-repeat left top transparent;
+}
+header .btsubmit {
+	background: url(../images/iefix_search.gif) no-repeat left top transparent;
+	border: 0;
+	width: 244px;
+	height: 41px;
+}
+header form ul {
+	width: 100%;
+}
+#morerestoran .btsubmit {
+	border: 0;
+}
+#morerestoran .btsubmit a {
+	background: url(../images/iefix_seemore.gif) no-repeat left top transparent;
+	width: 319px;
+	height: 51px;
+}
+#inviteborder .btsubmit {
+	background: url(../images/iefix_invite.gif) no-repeat left top transparent;
+	width: 67px;
+}
+#inviteborder  {
+	background: url(../images/iefix_invitebg.gif) no-repeat left top transparent;
+	
+}
+#inviteborder input {
+	line-height: 26px;
+}
+.selectroom {
+	filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#263E47', EndColorStr='#385A67', GradientType=0, enabled=true);
+	color: white;
+}
+.menubody menu {
+	min-height: 21px;
+}
+.mFleche {
+	height: 43px;
+}

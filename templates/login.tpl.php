@@ -1,7 +1,4 @@
-<?
-    $this->display('header');
-?>
-
+<section>
 <div class="entryForm">
 
 <div>Looks like you need to log in:</div>
@@ -38,7 +35,7 @@
     New User? Register <a href="/register.php">here</a>
   </div>
 </div>
-
+</section>
 
 <script type="text/javascript">
 // <![CDATA[
@@ -59,8 +56,3 @@
 
 // ]]>
 </script>
-
-
-<?
-    $this->display('footer');
-?>

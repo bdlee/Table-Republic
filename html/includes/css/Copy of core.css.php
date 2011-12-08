@@ -108,7 +108,7 @@ div.results div.restaurant div.background {
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99FFFFFF, endColorstr=#99FFFFFF);
 	/* For IE 8*/
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99FFFFFF, endColorstr=#99FFFFFF)";
-    <? if(is_ie()): ?>
+    <? if(Helpers::is_ie()): ?>
     background:transparent;
     <? endif; ?>
 }

@@ -1,0 +1,42 @@
+﻿section {
+	padding-bottom: 0;
+}
+.footercolumn {
+	margin: 0 10px;
+	padding-top: 13px;
+}
+#inviteborder input {
+	float: left;
+}
+#inviteborder .btsubmit input {
+	width: 67px;
+}
+.pages .pagesort span {
+	top: 27px;
+}
+.pages .pagesort select {
+	top: 27px;
+}
+.toppages .pagesort span {
+	top: 9px;
+}
+.toppages .pagesort select {
+	top: 9px;
+}
+.bottomitem {
+	height: 50px;
+	position: relative;
+}
+.bottomitem .showdetails {
+	position: absolute; top: 0px; right: 190px;
+}
+.bottomitem input{
+	absolute; top: 0px; right: 0px;
+}
+.note h2 {
+	position: relative;
+	border-top-width: 3px;
+}
+.item .objectnavigation {
+	margin-top: 45px;
+}
