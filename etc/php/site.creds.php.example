@@ -1,16 +1,16 @@
 <?
 
-    define('HOME_SITE', '');
-    define('QUEST_HOME', '');
-    define('SURVEY_HOME', '');
+    //ini_set('display_errors',true);
+    //error_reporting(E_ALL);
+    
+    define('IMG_PATH', '/includes/images');
+    define('YUI_LIB', '/includes/js/yui/build');
+    // define('YUI_LIB', 'http://yui.yahooapis.com/2.9.0/build');
+
+    define('PASS_SEED', 'theTableRep@lic brings Freinds together');
 
     define("DB_HOST", "");
     define("DB_USER", "");
     define("DB_PASS", "");
     define("DB_NAME", "");
-    
-    define("SURVEY_HOST", "");
-    define("SURVEY_USER", "");
-    define("SURVEY_PASS", "");
-    define("SURVEY_NAME", "");
 ?>
