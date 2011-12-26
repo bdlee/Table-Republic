@@ -51,7 +51,7 @@ function initSearchCalendar() {
 
             calendar = new YAHOO.widget.Calendar("cal", {
                 mindate: '<?= date('m/d/Y'); ?>',
-                <? if(isset($param_date)): ?>selected: '<?= $param_date; ?>',<? endif ?>
+                <? if(isset($searchfields['date'])): ?>selected: '<?= $searchfields['date']; ?>',<? endif ?>
                 iframe:false,          // Turn iframe off, since container has iframe support.
                 hide_blank_weeks:true  // Enable, to demonstrate how we handle changing height, using changeContent
             });
