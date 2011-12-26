@@ -46,6 +46,7 @@ class Reservations extends DataObject {
         if($number != null) { // number of guests
             $sql .= sprintf(" AND (t.table_min <= %d AND t.table_max >= %d", $number, $number);
             $sql .= sprintf(" OR t.standing_min <= %d AND t.standing_max >=%d)", $number, $number);
+        }
         $sql .= " ORDER BY reservation_date ASC, reservation_start_time ASC, table_min ASC";
         
         $result = $mysqli->query($sql);
