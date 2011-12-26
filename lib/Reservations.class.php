@@ -24,13 +24,28 @@ class Reservations extends DataObject {
     }
     
     // lookup a user by email password. returns the user obj
-    public static function getReservationsByTable($restaurantId, $tableId, $active = true) {
+    public static function getReservationsByTable($restaurantId, $tableId, $fields = null) {
         $mysqli = conn::get();
         
-        $sql = sprintf("SELECT * FROM reservations WHERE restaurant_id = '%s' AND table_id = '%s'",
+        if(isset($fields['date'])) {
+            $oDate = new Datetime($fields['date']);
+        } else {
+            $oDate = Helpers::defaultDate();
+        }
+        $date = $mysqli->real_escape_string($oDate->format('Y-m-d H:i:s'));
+        $dayofweek = $mysqli->real_escape_string($oDate->format('w'));
+        $number = isset($fields['num']) ? $fields['num'] : null;
+        $time = isset($fields['time']) ? $fields['time'] : null;
+        
+        $sql = sprintf("SELECT * FROM `reservations` WHERE restaurant_id = '%s' AND table_id = '%s'",
             $mysqli->real_escape_string($restaurantId),
             $mysqli->real_escape_string($tableId));
-        if($active) $sql .= " AND end_date > NOW() AND start_date < NOW()";
+        $sql .= " AND (s.end_date > '$date' OR s.end_date IS NULL) AND s.start_date <= '$date'";
+        if($fields != null) // do this only if a search query was put through
+            $sql .= " AND s.days_of_week LIKE '%$dayofweek%'";
+        if($number != null) { // number of guests
+            $sql .= sprintf(" AND (t.table_min <= %d AND t.table_max >= %d", $number, $number);
+            $sql .= sprintf(" OR t.standing_min <= %d AND t.standing_max >=%d)", $number, $number);
         $sql .= " ORDER BY reservation_date ASC, reservation_start_time ASC, table_min ASC";
         
         $result = $mysqli->query($sql);

@@ -20,6 +20,10 @@ class Helpers {
         }
         return $times;
     }
+    
+    public function defaultDate() {
+        return new DateTime();
+    }
 }
 
 ?>

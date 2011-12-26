@@ -23,7 +23,6 @@ class DisplayController {
         }
 
         $page->set('userId', false);
-
         $page->display('login');
         return;
     }
@@ -35,20 +34,22 @@ class DisplayController {
         }
         $page = new Page();
         
-        $page->set('includeSearch', true);
+        self::_initSearch($page);
         $page->display('home');
         return;
     }
     
     public static function listings() {
         $page = new Page();
-        $page->set('userId',false);
+        // $page->set('userId',false);
         
-        $restaurants = Restaurant::getActiveRestaurants($_GET);
+        $searchCriteria = $_GET;
+        $page->set('searchCriteria', $searchCriteria);
+        $restaurants = Restaurant::getActiveRestaurants($searchCriteria);
         
         $page->set('restaurants', $restaurants);
 
-        $page->set('includeSearch', true);
+        self::_initSearch($page);
         $page->display('listings');
         return;
     }
@@ -63,10 +64,32 @@ class DisplayController {
 
         $page = new Page();
 
+        $searchCriteria = $_GET;
+        $page->set('searchCriteria', $searchCriteria);
+        
         $page->set('restaurant', $restaurant);
 
-        $page->set('js',array('/includes/js/jquery.lightbox-0.5.pack.js'));
+        self::_initSearch($page);
         $page->display('restaurant');
         return;
+    }
+    
+    private static function _initSearch(&$page) {
+        $defaultDate = Helpers::defaultDate();
+        $defaultDate->add(new DateInterval('P7D'));
+        
+        $param_display_date   = isset($_GET['display_date']) ? $_GET['display_date'] : $defaultDate->format('F j, Y');
+        $param_date           = isset($_GET['date']) ? $_GET['date'] : $defaultDate->format('m/d/Y');
+        $param_time           = isset($_GET['time']) ? $_GET['time'] : '18:00';
+        $param_num            = isset($_GET['num']) ? $_GET['num'] : null;
+        
+        $searchfields = array(
+            'display_date' => $param_display_date,
+            'date' => $param_date,
+            'time' => $param_time,
+            'num' => $param_num
+        );
+        $page->set('searchfields', $searchfields);
+        $page->set('includeSearch', true);
     }
 }

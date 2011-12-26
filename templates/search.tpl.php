@@ -1,21 +1,6 @@
 <?
     $aTimes = Helpers::getTimes();
     
-    $defaultDate = new DateTime();
-    $defaultDate->add(new DateInterval('P7D'));
-    
-    $param_display_date   = isset($_GET['display_date']) ? $_GET['display_date'] : $defaultDate->format('F j, Y');
-    $param_date           = isset($_GET['date']) ? $_GET['date'] : $defaultDate->format('m/d/Y');
-    $param_time           = isset($_GET['time']) ? $_GET['time'] : '19:00';
-    $param_num            = isset($_GET['num']) ? $_GET['num'] : null;
-    
-    $fields = array(
-        'display_date' => $param_display_date,
-        'date' => $param_date,
-        'time' => $param_time,
-        'num' => $param_num
-    );
-    
 ?>
  <div id="search" class="wrap">
   <form action="" method="get">
@@ -24,7 +9,7 @@
    <ul>
    	<li>
     	<span>1. When is your party?</span>
-     <div class="formborder w198"><input type="text" id="formdate" name="date" value="<?= $param_display_date; ?>" onkeypress="event.preventDefault();" /><span></span></div>
+     <div class="formborder w198"><input type="text" id="formdate" name="date" value="<?= $searchfields['display_date']; ?>" onkeypress="event.preventDefault();" /><span></span></div>
     </li>
     <li>
     	<span>2. When's a good time?</span>
@@ -34,7 +19,7 @@
         <?
             $t = $oTime->format('G:i');
             if(!isset($selected)) {
-                if($param_time == $t) {
+                if($searchfields['time'] == $t) {
                     $selected = ' selected';
                 }
             } else
@@ -52,7 +37,7 @@
         <option value=""></option>
         <? $step = 1; ?>
         <? for($i = 6; $i < 200; $i = $i + $step): ?>
-        <option value="<?= $i ?>"<? if($param_num == $i) echo ' selected'; ?>><?= $i ?></option>
+        <option value="<?= $i ?>"<? if($searchfields['num'] == $i) echo ' selected'; ?>><?= $i ?></option>
         <? if($i == 20) $step = 5; ?>
         <? if($i == 50) $step = 50; ?>
         <? endfor; ?>

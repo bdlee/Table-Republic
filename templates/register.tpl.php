@@ -1,4 +1,4 @@
-
+<section>
 All fields are required:<br />
 <br />
 <div class="entryForm">
@@ -41,3 +41,4 @@ All fields are required:<br />
     </table>
   </form>
 </div>
+</section>

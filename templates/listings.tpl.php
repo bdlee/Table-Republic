@@ -1,4 +1,31 @@
-
+<?
+function pagelist() {
+    /*
+    <span class="listpage">
+    <a href="#" class="go_page">&lt;</a>
+    <a href="#" class="go_page">1</a>
+    <a href="#" class="go_page">2</a>
+    <a href="#" class="go_page">3</a>
+    <b class="active">4</b>
+    <a href="#" class="go_page">5</a>
+    <b class="more">...</b>
+    <a href="#" class="go_page">10</a>
+    <a href="#" class="go_page">20</a>
+    <a href="#" class="go_page">&gt;</a>
+   </span>
+   <span>Showing 3 of 20 results</span>
+    */
+?>
+   <span class="pagesort">
+    <select onchange="selectChange(this);">
+     <option value="1">Price High to Low</option>
+     <option value="2">Price Low to High</option>
+    </select>
+   </span>
+   <span>Sort By</span>
+<?
+}
+?>
 <!-- content -->
 <section>
 	<div class="wrap">
@@ -25,27 +52,37 @@
      <!-- capacity column -->
      <div class="capacity">
       <strong>Guest Capacity:</strong><br />
-      <span>Seats:</span> 20-30 people<br />
-      <span>Stands:</span> 40-60 people
+      <span>Seats:</span> <?= $r->getMinSeatCapacity(); ?>-<?= $r->getMaxSeatCapacity(); ?> people<br />
+      <span>Stands:</span> <?= $r->getMinStandCapacity(); ?>-<?= $r->getMaxStandCapacity(); ?> people
       <a href="#">view table</a>
      </div>
      <!-- end capacity column -->
      <!-- Cuisine -->
      <div class="cuisine">
-      <strong>Cuisine:</strong> American<br />
-      <strong>Price:</strong> $$$
+      <strong>Cuisine:</strong> <?= $r->cuisine; ?><br />
+      <strong>Price:</strong> <?= $r->price; ?>
       <a href="#">view menu</a>
      </div>
      <!-- end Cuisine -->
+     <?
+        $features = $r->getFeatures();
+        if(!empty($features)):
+     ?>
      <!-- special -->
      <div class="special">
       <strong>Special Features:</strong><br />
-      Good for Holiday Parties<br />
-      Good for Birthdays<br />
-      Private Room Available<br />
-      No Minimum Charge
+      <?
+        if(count($features) > 4) {
+            $features = array_slice($features, 0, 4);
+            echo implode("<br />", $features);
+            echo '<br /><a href="#">more</a>';
+        } else {
+            echo implode("<br />", $features);
+        }
+      ?>
      </div>
      <!-- end special -->
+     <? endif; ?>
     </div>
     <!-- end information -->
     <div class="sharelink"><a href="#"></a></div>
@@ -69,7 +106,10 @@
        <img class="bigimage" src="/includes/images/test_bigimage.gif" width="963" height="360" />
       </li>
      </ul>
-     <div class="note">Lorem Ipsum: Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</div>
+     <? $banner = $r->getBanner();
+     if(!empty($banner)): ?>
+     <div class="note"><?= $banner ?></div>
+     <? endif; ?>
     </div>
     <!-- end photos object -->
     <form action="#" method="post">
@@ -78,27 +118,32 @@
       <!-- available block -->
       <div class="available">
        <strong>Available Tables (choose one):</strong><br />
-       <div class="privateroom">
-        <b>Private Room</b>
-        <input type="radio" name="typeroom" id="place20_1" value="private20" /><label for="place20_1">Seated: 24-50 Guests</label>
-        <input type="radio" name="typeroom" id="place70_1" value="private70" /><label for="place70_1">Standing: 70 Guests</label>
-       </div>
-       <div class="mainroom">
-        <b>Main Room</b>
-        <input type="radio" name="typeroom" id="place12_1" value="main12" /><label for="place12_1">Seated: 12-20 Guests</label>
-        <input type="radio" name="typeroom" id="place40_1" value="main40" /><label for="place40_1">Standing: 40 Guests</label>
-       </div>
+        <? 
+            $tables = $r->getTables($searchCriteria);
+            foreach($tables as $i => $tbl): 
+                $class = ($i % 2 == 0) ? 'roomleft' : 'roomright';
+        ?>
+            <div class="<?= $class ?>">
+                <b><?= $tbl->name ?></b>
+                <? if(!empty($tbl->tableMin) && !empty($tbl->tableMax)): ?>
+                <input type="radio" name="<?= $r->getId() ;?>"  value="<?= $tbl->getId() ;?>" /><label>Seated: <?= $tbl->tableMin; ?>-<?= $tbl->tableMax; ?> Guests</label>
+                <? endif; ?>
+                <? if(!empty($tbl->standingMin) && !empty($tbl->standingMax)): ?>
+                <input type="radio" name="<?= $r->getId(); ?>"  value="<?= $tbl->getId(); ?>" /><label>Standing: <?= $tbl->standingMin; ?>-<?= $tbl->standingMax; ?> Guests</label>
+                <? endif; ?>
+            </div>
+        <? endforeach ?>
       </div>
       <!-- end available block -->
       <!-- block date and guest-->
       <div class="dateguest">
        <div class="dateparty">
         Your Party Date: <br />
-        <span>December 28, 2011</span>
+        <span><?= $searchfields['display_date']; ?></span>
        </div>
        <div class="guest">
         Number in Party:
-        <span>14 Guests</span>
+        <span><?= $searchfields['num']; ?> Guests</span>
        </div>
       </div>
       <!-- block date and guest-->
@@ -114,7 +159,10 @@
      </div>
      <!-- end detail block -->
      <!-- bottom block -->
-     <div class="bottomitem"><a href="#" class="showdetails" onclick="showDetail(this);return false;">view details</a><input type="submit" value="reserve now" /></div>
+     <div class="bottomitem">
+        <a href="/restaurant.php?id=<?= $r->getId() . '&' . $_SERVER['QUERY_STRING']; ?>" class="showdetails">view details</a>
+        <a href="#" class="reservenow" onclick="showDetail(this);return false;">reserve now</a>
+     </div>
      <!-- end bottom block -->
     </form>
    </div>
@@ -124,52 +172,14 @@
  	<!-- end result items -->
   <!-- page list bottom -->
   <div class="pages">
-   <span class="listpage">
-    <a href="#" class="go_page">&lt;</a>
-    <a href="#" class="go_page">1</a>
-    <a href="#" class="go_page">2</a>
-    <a href="#" class="go_page">3</a>
-    <b class="active">4</b>
-    <a href="#" class="go_page">5</a>
-    <b class="more">...</b>
-    <a href="#" class="go_page">10</a>
-    <a href="#" class="go_page">20</a>
-    <a href="#" class="go_page">&gt;</a>
-   </span>
-   <span>Showing 3 of 20 results</span>
-   <span class="pagesort">
-    <select onchange="selectChange(this);">
-     <option value="1">Price High to Low</option>
-     <option value="2">Price Low to High</option>
-    </select>
-   </span>
-   <span>Sort By</span>
+   <? pagelist() ?>
   </div>
   <!-- end page list bottom -->
  </div>
  <!-- page list top -->
  <div class="pages toppages">
  	<div class="wrap">
-   <span class="listpage">
-    <a href="#" class="go_page">&lt;</a>
-    <a href="#" class="go_page">1</a>
-    <a href="#" class="go_page">2</a>
-    <a href="#" class="go_page">3</a>
-    <b class="active">4</b>
-    <a href="#" class="go_page">5</a>
-    <b class="more">...</b>
-    <a href="#" class="go_page">10</a>
-    <a href="#" class="go_page">20</a>
-    <a href="#" class="go_page">&gt;</a>
-   </span>
-   <span>Showing 3 of 20 results</span>
-   <span class="pagesort">
-    <select onchange="selectChange(this);">
-     <option value="1">Price High to Low</option>
-     <option value="2">Price Low to High</option>
-    </select>
-   </span>
-   <span>Sort By</span>
+   <? pagelist() ?>
   </div>
  </div>
  <!-- end page list top -->
@@ -178,6 +188,7 @@
 
 <script type="text/javascript">
 // <![CDATA[
+(function() {
 
 function initRestaurant() {
 }
@@ -186,6 +197,7 @@ Event.onDOMReady(function() {
     initRestaurant();
 });
 
+})();
 // ]]>
 </script>
 

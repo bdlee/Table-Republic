@@ -38,7 +38,6 @@ if(isset($_POST['action'])) {
     }
     $page->set('errors', $errors);
 }
-
 $page->display('register');
 
 ?>

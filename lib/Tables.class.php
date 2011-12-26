@@ -6,8 +6,11 @@ class Table extends DataObject {
 
     private $id;
     public $restaurantId;
+    public $name;
     public $tableMin;
     public $tableMax;
+    public $standingMin;
+    public $standingMax;
     private $reservations;
     
     public function __construct($id = null) {
@@ -20,24 +23,26 @@ class Table extends DataObject {
         if(isset($fields['date'])) {
             $oDate = new Datetime($fields['date']);
         } else {
-            $oDate = new Datetime();
+            $oDate = Helpers::defaultDate();
         }
         $date = $mysqli->real_escape_string($oDate->format('Y-m-d H:i:s'));
         $dayofweek = $mysqli->real_escape_string($oDate->format('w'));
-        $number = isset($fields['number']) ? $fields['number'] : null;
+        $number = isset($fields['num']) ? $fields['num'] : null;
         $time = isset($fields['time']) ? $fields['time'] : null;
         
-        $sql = sprintf("SELECT t.* FROM tables t, reservations r WHERE t.restaurant_id = r.restaurant_id AND t.id = r.table_id AND t.restaurant_id = '%s'",
+        $sql = sprintf("SELECT t.* FROM `tables` t, `reservations` s WHERE t.restaurant_id = s.restaurant_id AND t.id = s.table_id AND t.restaurant_id = '%s'",
             $mysqli->real_escape_string($restaurantId));
-        $sql .= " AND r.end_date > NOW() AND r.start_date < NOW()";
-        if($fields) // do this only if a search query was put through
-            $sql .= " AND r.days_of_week = '%$dayofweek%'";
-        if($number) // number of guests
-            $number = sprintf(" AND t.table_min < %d AND table_max > %d", $number, $number);
-        if($time) // time of reservation
-            $time = sprintf(" AND r.start_time < '%s' AND r.end_time > '%s'", $time, $time);
-        $sql .= " GROUP BY t.id ORDER BY r.start_time ASC, t.table_min ASC";
-        
+        $sql .= " AND (s.end_date > '$date' OR s.end_date IS NULL) AND s.start_date <= '$date'";
+        if($fields != null) // do this only if a search query was put through
+            $sql .= " AND s.days_of_week LIKE '%$dayofweek%'";
+        if($number != null) { // number of guests
+            $sql .= sprintf(" AND (t.table_min <= %d AND t.table_max >= %d", $number, $number);
+            $sql .= sprintf(" OR t.standing_min <= %d AND t.standing_max >=%d)", $number, $number);
+        }
+        if($time != null) // time of reservation
+            $sql .= sprintf(" AND s.start_time <= '%s' AND s.end_time >='%s'", $time, $time);
+        $sql .= " GROUP BY t.id ORDER BY s.start_time ASC, t.table_min ASC";
+
         $result = $mysqli->query($sql);
         
         if($result === FALSE) {
@@ -79,10 +84,13 @@ class Table extends DataObject {
     
     protected function row2obj($row) {
         $table = new Table();
-        $table->id = $row['table_id'];
+        $table->id = $row['id'];
         $table->restaurantId = $row['restaurant_id'];
+        $table->name = $row['name'];
         $table->tableMin = $row['table_min'];
         $table->tableMax = $row['table_max'];
+        $table->standingMin = $row['standing_min'];
+        $table->standingMax = $row['standing_max'];
         
         return $table;
     }
@@ -101,9 +109,9 @@ class Table extends DataObject {
         
         return date('g:i A', $time);
     }
-    public function getReservations() {
+    public function getReservations($fields = null) {
         if(!isset($this->reservations)) {
-            $this->reservations = Reservations::getReservationsByTable($this->restaurantId, $this->id);
+            $this->reservations = Reservations::getReservationsByTable($this->restaurantId, $this->id, $fields);
         }
         return $this->reservations;
     }

@@ -34,6 +34,7 @@
         "/includes/js/jquery-ui-1.8.16.custom.min.js",
         "/includes/js/jquery.mSelect.min.js",
         "/includes/js/tools.js",
+        "/includes/js/jquery.lightbox-0.5.pack.js",
 //        "/includes/js/cufon/cufon.js",
 //        "/includes/js/cufon/Duality_400.font.js",
 //        "/includes/js/cufon/OptimusPrinceps_500.font.js",
@@ -49,6 +50,9 @@
     $css = array_merge($coreCss, (array) $css);
     $js  = array_merge($coreJs, (array) $js);
 
+    if(empty($includeSearch))
+        $css[] = '/includes/css/nosearch.css';
+    
     if(!isset($title)) {
         $title = "RSVP";
     }
@@ -121,4 +125,3 @@
 
 
     <div id="mainContent">
-    

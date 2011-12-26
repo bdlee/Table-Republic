@@ -1,9 +1,10 @@
- <div id="doobleline"></div>
+
+     <div id="doobleline"></div>
 <!-- header -->
 <header>
 	<div id="topline">
  	<div class="wrap">
-  	<a href="#" id="logotype"><img src="images/logotype.gif" /></a>
+  	<a href="#" id="logotype"><img src="<?= IMG_PATH ?>/logotype.gif" /></a>
    <nav>
     <menu>
      <li><a href="#">about tr</a></li>
@@ -12,12 +13,14 @@
     </menu>
    </nav>
    <div id="usermenu">
-	   <img src="images/user_icon.jpg" />
+    <? if(isset($user)): ?>
+	   <img src="<?= IMG_PATH ?>/user_icon.jpg" />
     <menu>
-     <li>hi christina!</li>
+     <li>hi <?= $user->fname; ?>!</li>
      <li><a href="#">My Account</a></li>
-     <li><a href="#">sign out</a></li>
+     <li><a href="/logout.php">sign out</a></li>
     </menu>
+    <? endif; ?>
    </div>
   </div>
  </div>
