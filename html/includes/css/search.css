@@ -1,10 +1,5 @@
 
 div#search {
-    width: 960px;
-    padding: 10px;
-    margin: 0 auto;
-    background-color: #FFF;
-    color: #FFF;
 }
 
 /* Clear calendar's float, using dialog inbuilt form element */

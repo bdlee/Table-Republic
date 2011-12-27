@@ -66,20 +66,20 @@
     <div class="objectphotos">
      <ul>
       <li>
-        <a href="<?= IMG_PATH ?>/big_image_demo.jpg" rel="lightbox[group]"><img class="preview" src="<?= IMG_PATH ?>/test_small_image.gif" width="85" height="48" /></a>
-       <img class="bigimage" src="<?= IMG_PATH ?>/test_bigimage.gif" width="963" height="360" />
+        <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" rel="lightbox[group]"><img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" width="85" height="48" /></a>
+       <img class="bigimage" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" width="963" height="360" />
       </li>
       <li>
-       <a href="<?= IMG_PATH ?>/big_image_demo2.jpg" rel="lightbox[group]"><img class="preview" src="<?= IMG_PATH ?>/test_small_image.gif" width="85" height="48" /></a>
-       <img class="bigimage" src="<?= IMG_PATH ?>/test_bigimage.gif" width="963" height="360" />
+       <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/big_image_demo2.jpg" rel="lightbox[group]"><img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" width="85" height="48" /></a>
+       <img class="bigimage" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="963" height="360" />
       </li>
       <li>
-       <a href="<?= IMG_PATH ?>/big_image_demo3.jpg" rel="lightbox[group]"><img class="preview" src="<?= IMG_PATH ?>/test_small_image.gif" width="85" height="48" /></a>
-       <img class="bigimage" src="<?= IMG_PATH ?>/test_bigimage.gif" width="963" height="360" />
+       <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/big_image_demo3.jpg" rel="lightbox[group]"><img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" width="85" height="48" /></a>
+       <img class="bigimage" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="963" height="360" />
       </li>
       <li>
-       <a href="<?= IMG_PATH ?>/big_image_demo4.jpg" rel="lightbox[group]"><img class="preview" src="<?= IMG_PATH ?>/test_small_image.gif" width="85" height="48" /></a>
-       <img class="bigimage" src="<?= IMG_PATH ?>/test_bigimage.gif" width="963" height="360" />
+       <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/big_image_demo4.jpg" rel="lightbox[group]"><img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" width="85" height="48" /></a>
+       <img class="bigimage" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="963" height="360" />
       </li>
      </ul>
      <? $banner = $restaurant->getBanner();
@@ -148,55 +148,64 @@
      </nav>
      <!-- end nav block -->
     </form>
-    <!-- note object -->
+    <!-- details block -->
     <div id="photos" class="note">
      <p>
-     <img src="<?= IMG_PATH ?>/test_small_image.gif" width="425" height="360" align="right" style="margin-left:50px; margin-bottom:40px;" />
+     <img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" width="425" height="360" align="right" style="margin-left:50px; margin-bottom:40px;" />
      <?= $restaurant->getDetails(); ?>
      </p>
-     <img src="<?= IMG_PATH ?>/test_small_image.gif" width="960" height="360" />
+     <img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" width="960" height="360" />
     </div>
-    <!-- end note object -->
-    <!-- space object-->
+    <!-- end details block -->
+    <!-- space block-->
+    <? $spacetext = $restaurant->getSpaceDetails();
+        if(!empty($spacetext)): ?>
     <div class="note">
     	<h2>Todd english's crossbar: the space</h2>
      <img src="<?= IMG_PATH ?>/test_small_image.gif" width="485" height="600" style="margin-right:40px; margin-bottom:20px;" align="left" />
      <h3>Todd English's Crossbar</h3>
      <p><?= $restaurant->getSpaceDetails(); ?></p>
      <div class="noteimgsmall">
-     	<img src="<?= IMG_PATH ?>/test_bigimage.gif" width="210" height="140" />
-     	<img src="<?= IMG_PATH ?>/test_bigimage.gif" width="210" height="140" />
-     	<img src="<?= IMG_PATH ?>/test_bigimage.gif" width="210" height="140" />
-     	<img src="<?= IMG_PATH ?>/test_bigimage.gif" width="210" height="140" />
+     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
+     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
+     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
+     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
      </div>
      <p>Main Dining Room - Seats up to 40 / Standing 70</p>
      <img src="<?= IMG_PATH ?>/test_small_image.gif" width="960" height="360" />
      <p>Private Room - Seats up to 60 / Standing 90</p>
     </div>
-    <!-- end space object -->
+    <? endif; ?>
+    <!-- end space block -->
     <!-- food block -->
+    <? $foodtext = $restaurant->getFoodDetails();
+        if(!empty($foodtext)): ?>
     <div class="note">
 	    <h2>Todd english's crossbar: the food</h2>
       <img src="<?= IMG_PATH ?>/test_small_image.gif" width="485" height="600" style="margin-right:40px; margin-bottom:20px;" align="left" />
 	     <h3 style="float:left; margin-right:20px;">Sed ut perspiciatis</h3>
       <p><?= $restaurant->getFoodDetails(); ?></p>
      <div class="noteimgsmall">
-     	<img src="<?= IMG_PATH ?>/test_bigimage.gif" width="210" height="140" />
-     	<img src="<?= IMG_PATH ?>/test_bigimage.gif" width="210" height="140" />
-     	<img src="<?= IMG_PATH ?>/test_bigimage.gif" width="210" height="140" />
-     	<img src="<?= IMG_PATH ?>/test_bigimage.gif" width="210" height="140" />
+     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
+     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
+     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
+     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
      </div>
      <p>Lorem ipsum dolor sit amet</p>
     </div>
+    <? endif; ?>
     <!-- end food block -->
-    <!-- block group -->
+    <!-- group block -->
+    <? $grouptext = $restaurant->getGroupDetails();
+        if(!empty($grouptext)): ?>
     <div class="note">
 	    <h2>WHY WE THINK IT'S GREAT FOR GROUPS</h2>
-     <img src="<?= IMG_PATH ?>/test_bigimage.gif" height="250" width="435" align="right" style="margin-left:40px;"/>
+     <img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" height="250" width="435" align="right" style="margin-left:40px;"/>
 	     <h3 style="float:left; margin-right:20px;">Sed ut perspiciatis</h3>
       <p><?= $restaurant->getGroupDetails(); ?></p>
     </div>
-    <!-- end block group -->
+    <? endif; ?>
+    <!-- end group block -->
     <!-- menu block -->
     <div id="menu" class="note">
     	<h2>TODD English's crossbar: the menu</h2>
@@ -342,19 +351,19 @@
       <div class="rightcolumn">
       	<h3>HORS D'oEuvre selections</h3>
        <p>
-       	<strong>Puffed Pig's Ears –</strong> black lime, smoked paprika<br />
-       	<strong>PopCorn –</strong> bacon, cheddar, chives<br />
-        <strong>Lobster Guacamole –</strong> tortilla with chipotle aioli<br />
-        <strong>Pulled Pork Bites – </strong>BBQ pork, crispy polenta<br />
-        <strong>Bacon Jam –</strong> John Boy bacon, maple, coffee<br />
-        <strong>Beets and Goat Cheese –</strong> marcona almonds<br />
-        <strong>Tuna Tartar –</strong> tortilla with black bean and spicy aioli<br />
-        <strong>Chicken Mole –</strong> tortilla with queso fresco and radish<br />
-        <strong>BBQ Pork –</strong> tortilla with hominy relish and cilantro<br />
-        <strong>Grilled Scallop –</strong> chorizo sauce<br />
-        <strong>Mini Cubano Sandwich – </strong>tasso ham, roasted shoulder, pickles, provolone<br />
-        <strong>White Gazpacho – </strong>crab<br />
-        <strong>Mini Bratwurst –</strong> pretzel roll, spicy mustard
+       	<strong>Puffed Pig's Ears -</strong> black lime, smoked paprika<br />
+       	<strong>PopCorn -</strong> bacon, cheddar, chives<br />
+        <strong>Lobster Guacamole -</strong> tortilla with chipotle aioli<br />
+        <strong>Pulled Pork Bites - </strong>BBQ pork, crispy polenta<br />
+        <strong>Bacon Jam -</strong> John Boy bacon, maple, coffee<br />
+        <strong>Beets and Goat Cheese -</strong> marcona almonds<br />
+        <strong>Tuna Tartar -</strong> tortilla with black bean and spicy aioli<br />
+        <strong>Chicken Mole -</strong> tortilla with queso fresco and radish<br />
+        <strong>BBQ Pork -</strong> tortilla with hominy relish and cilantro<br />
+        <strong>Grilled Scallop -</strong> chorizo sauce<br />
+        <strong>Mini Cubano Sandwich - </strong>tasso ham, roasted shoulder, pickles, provolone<br />
+        <strong>White Gazpacho - </strong>crab<br />
+        <strong>Mini Bratwurst -</strong> pretzel roll, spicy mustard
        </p>
        <h5>Pricing</h5>
        <p>
@@ -374,7 +383,9 @@
      <address>
       <strong>Neighborhood:</strong> Flatiron <br />135 West Broadway<br /> New York, NY <br />(212) 374-1135 
      </address>
+   <? /* Google Map
      <img src="<?= IMG_PATH ?>/test_small_image.gif" width="960" height="450" />
+   */ ?>
    </div>
    <!-- end location -->
    <div class="note">

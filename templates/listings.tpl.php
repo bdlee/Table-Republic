@@ -31,20 +31,21 @@ function pagelist() {
 	<div class="wrap">
  	<!-- result items -->
  	<div class="resultitems">
-<? foreach($restaurants as $i => $r): ?>
+<? foreach($restaurants as $i => $restaurant): ?>
    <!-- item result-->
    <div class="item">
-    <h2 class="name"><?= $r->name; ?></h2>
+    <h2 class="name"><?= $restaurant->name; ?></h2>
     <!-- information -->
     <div class="information">
      <!-- map column -->
      <div class="map">
+     <? // need to make this a goole map link ?>
       <a href="#"><img src="images/map.jpg" /></a>
       <address>
        <strong>Neighborhood:</strong><br>
-       <?= $r->address1; ?><br>
-       <?= empty($r->address2) ? '' : $r->address2.'<br>'; ?>
-       <?= "{$r->city}, {$r->state} {$r->zip} "; ?>
+       <?= $restaurant->address1; ?><br>
+       <?= empty($restaurant->address2) ? '' : $restaurant->address2.'<br>'; ?>
+       <?= "{$restaurant->city}, {$restaurant->state} {$restaurant->zip} "; ?>
        <a href="#">view map</a>
       </address>
      </div>
@@ -52,20 +53,20 @@ function pagelist() {
      <!-- capacity column -->
      <div class="capacity">
       <strong>Guest Capacity:</strong><br />
-      <span>Seats:</span> <?= $r->getMinSeatCapacity(); ?>-<?= $r->getMaxSeatCapacity(); ?> people<br />
-      <span>Stands:</span> <?= $r->getMinStandCapacity(); ?>-<?= $r->getMaxStandCapacity(); ?> people
+      <span>Seats:</span> <?= $restaurant->getMinSeatCapacity(); ?>-<?= $restaurant->getMaxSeatCapacity(); ?> people<br />
+      <span>Stands:</span> <?= $restaurant->getMinStandCapacity(); ?>-<?= $restaurant->getMaxStandCapacity(); ?> people
       <a href="#">view table</a>
      </div>
      <!-- end capacity column -->
      <!-- Cuisine -->
      <div class="cuisine">
-      <strong>Cuisine:</strong> <?= $r->cuisine; ?><br />
-      <strong>Price:</strong> <?= $r->price; ?>
+      <strong>Cuisine:</strong> <?= $restaurant->cuisine; ?><br />
+      <strong>Price:</strong> <?= $restaurant->price; ?>
       <a href="#">view menu</a>
      </div>
      <!-- end Cuisine -->
      <?
-        $features = $r->getFeatures();
+        $features = $restaurant->getFeatures();
         if(!empty($features)):
      ?>
      <!-- special -->
@@ -90,23 +91,23 @@ function pagelist() {
     <div class="objectphotos">
      <ul>
       <li>
-       <img class="preview" src="/includes/images/test_small_image.gif" width="85" height="48" />
-       <img class="bigimage" src="/includes/images/test_bigimage.gif" width="963" height="360" />
+       <img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" width="85" height="48" />
+       <img class="bigimage" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="963" height="360" />
       </li>
       <li>
-       <img class="preview" src="/includes/images/test_small_image.gif" width="85" height="48" />
-       <img class="bigimage" src="/includes/images/test_bigimage.gif" width="963" height="360" />
+       <img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" width="85" height="48" />
+       <img class="bigimage" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="963" height="360" />
       </li>
       <li>
-       <img class="preview" src="/includes/images/test_small_image.gif" width="85" height="48" />
-       <img class="bigimage" src="/includes/images/test_bigimage.gif" width="963" height="360" />
+       <img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" width="85" height="48" />
+       <img class="bigimage" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="963" height="360" />
       </li>
       <li>
-       <img class="preview" src="/includes/images/test_small_image.gif" width="85" height="48" />
-       <img class="bigimage" src="/includes/images/test_bigimage.gif" width="963" height="360" />
+       <img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" width="85" height="48" />
+       <img class="bigimage" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="963" height="360" />
       </li>
      </ul>
-     <? $banner = $r->getBanner();
+     <? $banner = $restaurant->getBanner();
      if(!empty($banner)): ?>
      <div class="note"><?= $banner ?></div>
      <? endif; ?>
@@ -119,17 +120,17 @@ function pagelist() {
       <div class="available">
        <strong>Available Tables (choose one):</strong><br />
         <? 
-            $tables = $r->getTables($searchCriteria);
+            $tables = $restaurant->getTables($searchCriteria);
             foreach($tables as $i => $tbl): 
                 $class = ($i % 2 == 0) ? 'roomleft' : 'roomright';
         ?>
             <div class="<?= $class ?>">
                 <b><?= $tbl->name ?></b>
                 <? if(!empty($tbl->tableMin) && !empty($tbl->tableMax)): ?>
-                <input type="radio" name="<?= $r->getId() ;?>"  value="<?= $tbl->getId() ;?>" /><label>Seated: <?= $tbl->tableMin; ?>-<?= $tbl->tableMax; ?> Guests</label>
+                <input type="radio" name="<?= $restaurant->getId() ;?>"  value="<?= $tbl->getId() ;?>" /><label>Seated: <?= $tbl->tableMin; ?>-<?= $tbl->tableMax; ?> Guests</label>
                 <? endif; ?>
                 <? if(!empty($tbl->standingMin) && !empty($tbl->standingMax)): ?>
-                <input type="radio" name="<?= $r->getId(); ?>"  value="<?= $tbl->getId(); ?>" /><label>Standing: <?= $tbl->standingMin; ?>-<?= $tbl->standingMax; ?> Guests</label>
+                <input type="radio" name="<?= $restaurant->getId(); ?>"  value="<?= $tbl->getId(); ?>" /><label>Standing: <?= $tbl->standingMin; ?>-<?= $tbl->standingMax; ?> Guests</label>
                 <? endif; ?>
             </div>
         <? endforeach ?>
@@ -160,7 +161,7 @@ function pagelist() {
      <!-- end detail block -->
      <!-- bottom block -->
      <div class="bottomitem">
-        <a href="/restaurant.php?id=<?= $r->getId() . '&' . $_SERVER['QUERY_STRING']; ?>" class="showdetails">view details</a>
+        <a href="/restaurant.php?id=<?= $restaurant->getId() . '&' . $_SERVER['QUERY_STRING']; ?>" class="showdetails">view details</a>
         <a href="#" class="reservenow" onclick="showDetail(this);return false;">reserve now</a>
      </div>
      <!-- end bottom block -->
