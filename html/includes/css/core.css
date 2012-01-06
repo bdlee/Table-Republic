@@ -12,6 +12,18 @@
     clear: both !important;
 }
 
+/* universal loader div */
+.loader {
+	background:transparent url(/includes/images/assets/loading.gif) no-repeat center center;
+	display:none;
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:300;
+}
+
 /* Start outsourced CSS */
 @font-face {
 	font-family: 'BelleroseLight';
@@ -239,33 +251,47 @@ section {
 	height: 360px;
 	margin-bottom: 26px;
 }
-.objectphotos ul {
+.objectphotos .banner-nav {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
 	height: 360px;
 }
-.objectphotos li {
-	margin: 1px 0 0 1px;
-	padding: 0;
+.objectphotos .banner-nav a {
 	height: 48px;
+	width: 85px;
+	margin:1px;
+	opacity:0.5;
+	display: block;
+	z-index:1;
+	position:relative;
+}
+.objectphotos .banner-nav a.active {
+	opacity:1;
 }
 .objectphotos .preview {
 	position: relative;
 	z-index: 1;
 	margin: 0;
+	height: 48px;
+	width: 85px;
 }
 .objectphotos .bigimage {
 	position: absolute;
 	left: 0;
-	top: 0;
 	z-index: 0;
-	display: none;
 	margin: 0;
+	width: 963px;
+	height: 360px;
 }
-.objectphotos ul :first-child .bigimage {
-	display: block;
+.objectphotos .banner-cnnr {
+	width: 963px;
+	height: 360px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	overflow: hidden;
 }
 .objectphotos .note{
 	background: url("../images/flag.png") no-repeat scroll left top transparent;

@@ -63,25 +63,25 @@
     <!-- end information -->
     <div class="sharelink"><a href="#"></a></div>
     <!-- photos object -->
-    <div class="objectphotos">
-     <ul>
+    <div id="banner" class="objectphotos">
+     <ul class="banner-nav">
       <li>
-        <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" rel="lightbox[group]"><img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" width="85" height="48" /></a>
-       <img class="bigimage" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" width="963" height="360" />
+        <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" data-eq="1" class="active"><img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" /></a>
       </li>
       <li>
-       <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/big_image_demo2.jpg" rel="lightbox[group]"><img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" width="85" height="48" /></a>
-       <img class="bigimage" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="963" height="360" />
+       <a href="http://www.redstatereport.com/wp-content/uploads/2010/05/Illegal-Immigration.jpg" data-eq="2"><img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" /></a>
       </li>
       <li>
-       <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/big_image_demo3.jpg" rel="lightbox[group]"><img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" width="85" height="48" /></a>
-       <img class="bigimage" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="963" height="360" />
+       <a href="http://img225.imageshack.us/img225/1387/screenhunter1816vq.jpg" data-eq="3"><img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" /></a>
       </li>
       <li>
-       <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/big_image_demo4.jpg" rel="lightbox[group]"><img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" width="85" height="48" /></a>
-       <img class="bigimage" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="963" height="360" />
+       <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" data-eq="4"><img class="preview" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_small_image.gif" /></a>
       </li>
      </ul>
+     <div class="banner-cnnr">
+       <img class="bigimage active" src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" data-current="1" width="963" height="360" />
+       <div class="loader"></div>
+     </div>
      <? $banner = $restaurant->getBanner();
      if(!empty($banner)): ?>
      <div class="note"><?= $banner ?></div>
