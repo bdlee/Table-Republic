@@ -166,10 +166,10 @@
      <h3>Todd English's Crossbar</h3>
      <p><?= $restaurant->getSpaceDetails(); ?></p>
      <div class="noteimgsmall">
-     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
-     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
-     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
-     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
+      <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" class="lightbox"><img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" /></a>
+      <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" class="lightbox"><img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" /></a>
+      <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" class="lightbox"><img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" /></a>
+      <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" class="lightbox"><img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" /></a>
      </div>
      <p>Main Dining Room - Seats up to 40 / Standing 70</p>
      <img src="<?= IMG_PATH ?>/test_small_image.gif" width="960" height="360" />
@@ -186,10 +186,10 @@
 	     <h3 style="float:left; margin-right:20px;">Sed ut perspiciatis</h3>
       <p><?= $restaurant->getFoodDetails(); ?></p>
      <div class="noteimgsmall">
-     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
-     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
-     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
-     	<img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" />
+      <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" class="lightbox"><img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" /></a>
+      <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" class="lightbox"><img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" /></a>
+      <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" class="lightbox"><img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" /></a>
+      <a href="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/banner.jpg" class="lightbox"><img src="<?= IMG_PATH ?>/assets/<?= $restaurant->getId(); ?>/test_bigimage.gif" width="210" height="140" /></a>
      </div>
      <p>Lorem ipsum dolor sit amet</p>
     </div>

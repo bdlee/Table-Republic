@@ -75,9 +75,9 @@
 	 * @private
 	 */
 	function init() {
-		$v.bannerNav  = $('#banner .banner-nav a');
-		$v.bannerCnnr = $('#banner .banner-cnnr');
-		$v.bannerLoader = $('#banner .loader');
+		$v.bannerNav     = $('#banner .banner-nav a');
+		$v.bannerCnnr    = $('#banner .banner-cnnr');
+		$v.bannerLoader  = $('#banner .loader');
 
 		bannerCnnrHeight = $v.bannerCnnr.height();
 

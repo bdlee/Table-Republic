@@ -97,3 +97,12 @@ function initSearchCalendar() {
     Event.on(showBtn, "click", searchCalendar);
     Event.on(inputField, "click", searchCalendar);
 }
+
+
+// DOM ready stuff.
+$(function() {
+    $('a.lightbox').lightBox({
+            imageLoading    : '/includes/images/lightbox-ico-loading.gif', 
+            imageBtnClose   : '/includes/images/lightbox-btn-close.gif'
+    });
+});

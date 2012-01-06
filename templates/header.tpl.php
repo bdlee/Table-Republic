@@ -14,6 +14,7 @@
         "/includes/css/core.css",
         "/includes/css/search.css",
         "/includes/css/smoothness/jquery-ui-1.8.16.custom.css",
+        "/includes/css/jquery.lightbox-0.5.css",
         YUI_LIB."/fonts/fonts-min.css",
         YUI_LIB."/button/assets/skins/sam/button.css",
         YUI_LIB."/container/assets/skins/sam/container.css",
